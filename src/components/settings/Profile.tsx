@@ -5,6 +5,8 @@ import { useAlert } from "../ui/useAlert";
 import { Alert } from "../ui/Alert";
 import { useOutletContext } from "react-router-dom";
 import Div from "../ui/elements/Div";
+import { buttonVariants } from "@/components/ui/button";
+import logOut from "@/utils/logout";
 
 export default function Profile() {
   const user = useOutletContext<User>();
@@ -40,7 +42,7 @@ export default function Profile() {
     <>
       <div className="flex flex-row">
         {!isEditing ? (
-          <Div className="rounded-md w-96 p-2 flex flex-col">
+          <Div className="rounded-md w-72 p-2 flex flex-col">
             <div className="flex flex-col gap-2">
               <h1 className="text-2xl">
                 {!user?.user_metadata?.display_name
@@ -51,21 +53,27 @@ export default function Profile() {
               <div className="form-control">
                 <label className="label">Bio</label>
                 <div id="bioText" className="bg-white/10 p-2 rounded-md w-full">
-                  {user?.user_metadata?.bio}
+                  {user?.user_metadata?.bio ?? "No bio yet.. Add one!"}
                 </div>
               </div>
-              <div className="card-actions w-full justify-end">
+              <div className="card-actions w-full justify-end flex flex-col gap-2">
                 <button
-                  className="bg-primary p-2 w-full rounded-md hover:bg-secondary transition-all duration-400 ease-out"
+                  className={buttonVariants({ variant: "default" })}
                   onClick={() => setIsEditing(true)}
                 >
                   Edit
+                </button>
+                <button
+                  className={buttonVariants({ variant: "destructive" })}
+                  onClick={logOut}
+                >
+                  Logout
                 </button>
               </div>
             </div>
           </Div>
         ) : (
-          <Div className="rounded-md w-96 p-2 flex flex-col gap-2">
+          <Div className="rounded-md w-72 p-2 flex flex-col gap-2">
             <div className="flex flex-col gap-2">
               <div className="flex flex-col gap-2">
                 <label className="label">Display Name</label>
@@ -85,11 +93,14 @@ export default function Profile() {
                 ></textarea>
               </div>
               <div className="card-actions w-full justify-end flex flex-col gap-2">
-                <button className="bg-primary p-2 w-full rounded-md hover:bg-secondary transition-all duration-400 ease-out" onClick={handleSave}>
+                <button
+                  className={buttonVariants({ variant: "default" })}
+                  onClick={handleSave}
+                >
                   Save Changes
                 </button>
                 <button
-                  className="bg-primary p-2 w-full rounded-md hover:bg-secondary transition-all duration-400 ease-out"
+                  className={buttonVariants({ variant: "destructive" })}
                   onClick={() => setIsEditing(false)}
                 >
                   Cancel

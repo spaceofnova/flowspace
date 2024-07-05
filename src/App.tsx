@@ -36,8 +36,8 @@ function App() {
     <div className="w-screen h-screen text-text">
       <Loader />
       <UserSettingsProvider>
-        {user && <Nav user={user} />}
-        <div className="w-[calc(100%-3rem)] h-full flex flex-col absolute top-0 right-0 p-2 overflow-y-auto">
+        <Nav />
+        <div className="w-[calc(100%-3rem)] h-full flex flex-col absolute top-0 right-0 p-2 overflow-y-auto content">
           <Outlet context={user} />
         </div>
         <Wallpaper />

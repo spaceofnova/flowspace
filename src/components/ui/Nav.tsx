@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 import { FiGrid, FiHome, FiSettings, FiShoppingBag } from "react-icons/fi";
-import { User } from "@supabase/supabase-js";
 import Div from "./elements/Div";
 import supabase from "@/utils/supabase";
 
@@ -11,7 +10,7 @@ const logOut = async () => {
   }
 };
 
-export default function Nav({ user }: { user: User }) {
+export default function Nav() {
   const location = useLocation();
 
   const NavPages = [
@@ -50,6 +49,7 @@ export default function Nav({ user }: { user: User }) {
         </div>
         {NavPages.map((page) => (
           <Link
+            unstable_viewTransition={true}
             to={page.path}
             key={page.name}
             className={`flex items-center justify-center w-full aspect-square transition-all duration-400 ease-out gap-1 ${
@@ -60,7 +60,6 @@ export default function Nav({ user }: { user: User }) {
           </Link>
         ))}
       </div>
-      <div>{user?.user_metadata.display_name}</div>
     </Div>
   );
 }

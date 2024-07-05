@@ -16,7 +16,7 @@
 .App-header {
   background-color: #282c34;
   height: 10vh;
-  display: flex; 
+  display: flex;
   gap: 10px;
   align-items: center;
   justify-content: center;
@@ -35,4 +35,42 @@
   to {
     transform: rotate(360deg);
   }
+}
+/* Magicawesomeness */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-from-right {
+  from {
+    transform: translateY(50px);
+  }
+}
+
+@keyframes slide-to-left {
+  to {
+    transform: translateY(-50px);
+  }
+}
+
+.content {
+  view-transition-name: content;
+}
+
+::view-transition-old(content) {
+  animation: 250ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
+    250ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+}
+
+::view-transition-new(content) {
+  animation: 250ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
+    250ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
 }

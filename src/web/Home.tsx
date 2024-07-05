@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import { useOutletContext, Link } from "react-router-dom";
 import { UserSettingsContext } from "../components/contexts/UserSettingsContext";
 import { FiX } from "react-icons/fi";
-import { Button } from "@/components/ui/button";
 
 interface Item {
   id: string;
@@ -55,7 +54,6 @@ export default function Home() {
               />
             )}
           </h2>
-          <Button className="mt-4">View All</Button>
           {recentItems.length > 0 ? (
             <div className="flex gap-4 mt-4">
               {recentItems.map((item: Item) => (
