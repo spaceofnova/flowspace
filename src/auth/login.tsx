@@ -62,8 +62,8 @@ export default function Login() {
         </svg>{" "}
         Back
       </Link>
-      <div className="">
-        <Card className="animate-in flex flex-col w-full justify-center text-foreground mx-auto sm:max-w-sm border border-white/10 p-2 rounded-xl h-fit bg-white/5">
+      <div className="animate-in">
+        <Card className="flex flex-col w-full justify-center text-foreground mx-auto sm:max-w-sm border border-white/10 p-2 rounded-xl h-fit bg-white/5">
           <CardHeader>
             <CardTitle>Login</CardTitle>
             <CardDescription>To continue to Flowspace</CardDescription>

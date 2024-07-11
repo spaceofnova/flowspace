@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { UserSettingsContext } from "../contexts/UserSettingsContext";
+import LightBackground from "./LightBackground";
 
 export default function Wallpaper() {
   const { userSettings } = useContext(UserSettingsContext);
@@ -12,7 +13,9 @@ export default function Wallpaper() {
           className="w-full h-full object-cover"
         />
       ) : (
-        <div className="w-full h-full bg-background" />
+        <div className="w-full h-full relative overflow-hidden">
+          <LightBackground className="absolute -top-12 -left-12 w-[104vw] h-[104vh] opacity-35" />
+        </div>
       )}
     </div>
   );

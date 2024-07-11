@@ -12,7 +12,6 @@ import Store from "./web/Store";
 import Settings from "./web/Settings";
 import AppPlayer from "./web/AppPlayer";
 import ErrorPage from "./components/ErrorPage";
-import { middleware } from "./middleware";
 import { ThemeProvider } from "./components/providers/ThemeProvider";
 
 const router = createBrowserRouter([
@@ -24,12 +23,12 @@ const router = createBrowserRouter([
   {
     path: "/web",
     element: <App />,
-    loader: middleware,
     errorElement: <ErrorPage />,
     children: [
       {
         path: "/web/",
         element: <Home />,
+        index: true,
       },
       {
         path: "/web/apps",
@@ -64,8 +63,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <RouterProvider router={router} future={{ v7_startTransition: true }} />
+    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+      <RouterProvider router={router} />
     </ThemeProvider>
   </React.StrictMode>
 );

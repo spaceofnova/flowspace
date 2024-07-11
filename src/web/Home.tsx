@@ -1,8 +1,6 @@
 import { User } from "@supabase/supabase-js";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useOutletContext, Link } from "react-router-dom";
-import { UserSettingsContext } from "../components/contexts/UserSettingsContext";
-import { FiX } from "react-icons/fi";
 
 interface Item {
   id: string;
@@ -12,7 +10,6 @@ interface Item {
 
 export default function Home() {
   const [recentItems, setRecentItems] = useState<Item[]>([]);
-  const { userSettings } = useContext(UserSettingsContext);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -33,7 +30,7 @@ export default function Home() {
     <>
       <div className="flex flex-col justify-between h-full">
         <div>
-          <h1 className="text-4xl font-bold text-default [text-shadow:_0_1px_10px_rgb(0_0_0_/_40%)] flex gap-2 items-center">
+          <h1 className="text-4xl font-bold flex gap-2 items-center">
             {greeting +
               ", " +
               (user?.user_metadata.first_name ||
@@ -41,27 +38,14 @@ export default function Home() {
               "!"}
           </h1>
         </div>
-        <div className="-translate-y-8">
-          <h2 className="text-3xl text-default font-bold [text-shadow:_0_1px_10px_rgb(0_0_0_/_40%)] flex gap-2 items-center">
-            Jump back in
-            {recentItems.length > 0 && (
-              <FiX
-                className="ml-2 w-6 h-6 cursor-pointer text-red-500 [text-shadow:_0_1px_10px_rgb(0_0_0_/_40%)]"
-                onClick={() => {
-                  setRecentItems([]);
-                  localStorage.setItem("recentItems", JSON.stringify([]));
-                }}
-              />
-            )}
-          </h2>
+        <div>
+          <h2 className="text-3xl font-bold flex ml-2">Jump back in</h2>
           {recentItems.length > 0 ? (
-            <div className="flex gap-4 mt-4">
+            <div className="flex gap-4">
               {recentItems.map((item: Item) => (
                 <Link
                   key={item.id}
-                  className={`w-52 bg-base-100 shadow-xl bg-background/75 rounded-xl flex flex-col justify-between ${
-                    userSettings.blurEffects ? "backdrop-blur-xl" : ""
-                  }`}
+                  className="w-52 bg-base-100 shadow-xl bg-background rounded-xl flex flex-col justify-between"
                   to={"/web/apps/" + item.id}
                 >
                   <figure className="pt-2 px-2">
@@ -78,7 +62,9 @@ export default function Home() {
               ))}
             </div>
           ) : (
-            <p>Play some games and they'll appear here!</p>
+            <p className="ml-2 mb-2">
+              Play some games and they'll appear here!
+            </p>
           )}
         </div>
       </div>
