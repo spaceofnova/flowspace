@@ -13,8 +13,8 @@ export default function Wallpaper() {
           className="w-full h-full object-cover"
         />
       ) : (
-        <div className="w-full h-full relative overflow-hidden">
-          <LightBackground className="absolute -top-12 -left-12 w-[104vw] h-[104vh] opacity-35" />
+        <div className="w-full h-full relative overflow-hidden hidden md:block">
+          <LightBackground className="absolute w-full h-full opacity-35" />
         </div>
       )}
     </div>

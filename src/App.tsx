@@ -37,7 +37,7 @@ function App() {
       <Loader />
       <UserSettingsProvider>
         <Nav />
-        <div className="w-[calc(100%-3rem)] h-full flex flex-col absolute top-0 right-0 p-2 overflow-y-auto rounded-l-xl bg-[rgba(255,255,255,0.2)]">
+        <div className="w-full h-[calc(100%-3rem)] md:w-[calc(100%-3rem)] md:h-full flex flex-col absolute top-0 right-0 p-2 overflow-y-auto overflow-x-hidden md:rounded-l-xl">
           <Outlet context={user} />
           <Wallpaper />
         </div>

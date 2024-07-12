@@ -15,7 +15,6 @@ interface event {
   };
 }
 
-
 function addToRecents(item: App) {
   if (typeof window !== "undefined") {
     const recentItems = JSON.parse(localStorage.getItem("recentItems") || "[]");
@@ -62,7 +61,7 @@ export default function Apps() {
   }, []);
   return (
     <div className="grid">
-      <div className="flex w-full gap-4 p-4">
+      <div className="flex w-full gap-4">
         <input
           type="search"
           name="items_search"
@@ -72,7 +71,7 @@ export default function Apps() {
           onChange={filterItems}
         />
       </div>
-      <div className="flex gap-4 flex-wrap p-4 h-full w-[calc(100%-3rem)] mx-auto">
+      <div className="flex gap-4 flex-wrap p-4 h-full w-[calc(100%-2rem)] mx-auto md:w-full">
         {filteredItems?.map((item: App) => (
           <Link
             className="h-28 w-36 bg-base-300 flex flex-col relative cursor-pointer overflow-hidden rounded-md p-0 animate-in hover:bg-base-300/90"

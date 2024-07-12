@@ -18,10 +18,8 @@ export default function Settings() {
     },
   ];
   return (
-    <div className="flex flex-col h-full w-full gap-4 p-4">
-      <h1 className="text-4xl font-bold [text-shadow:_0_1px_10px_rgb(0_0_0_/_40%)]">
-        Settings
-      </h1>
+    <div className="flex flex-col h-full w-full gap-4">
+      <h1 className="text-4xl font-bold">Settings</h1>
       <Div className="md:w-fit w-full overflox-x-scroll flex gap-4 p-2 rounded-md ">
         {pages.map((item) => (
           <button
