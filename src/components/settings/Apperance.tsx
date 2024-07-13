@@ -1,41 +1,45 @@
-import { useContext } from "react";
-import { UserSettingsContext } from "../contexts/UserSettingsContext";
 import Div from "../ui/elements/Div";
-
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { useTheme } from "@/components/providers/ThemeProvider";
+import { AnimatePresence, motion } from "framer-motion";
 export default function Apperance() {
-  const { updateValue, userSettings } = useContext(UserSettingsContext);
+  const { theme, setTheme } = useTheme();
   return (
-    <Div className="flex flex-col p-2 rounded-md w-80">
-      <h1 className="text-4xl font-bold">Apperance</h1>
-      <div className="flex flex-col gap-2">
-        <div className="flex flex-col gap-2">
-          <label className="text-font-bold">Theme</label>
-          <div className="flex gap-2">
-            <button className="btn btn-primary" onClick={() => updateValue("theme", "light")}>
-              Light
-            </button>
-            <button className="btn btn-secondary" onClick={() => updateValue("theme", "dark")}>
-              Dark
-            </button>
-          </div>
+    <Div className="flex flex-col p-2 rounded-md w-96 gap-2">
+      <h1 className="text-4xl font-bold mb-12">Apperance</h1>
+      <div className="border-2 border-accent rounded-sm flex flex-col gap-2 p-2">
+        <h2 className="text-2xl font-bold">Colors</h2>
+        <div className="flex items-center space-x-2">
+          <Label htmlFor="system-switch">Match System?</Label>
+          <Switch
+            id="system-switch"
+            checked={theme === "system"}
+            onClick={() => setTheme(theme === "system" ? "dark" : "system")}
+          />
         </div>
-        <div className="flex flex-col gap-2">
-          <label className="text-sm font-bold">Background</label>
-          <div className="flex gap-2">
-            <button className="btn btn-primary" onClick={() => updateValue("backgroundType", "color")}>
-              Color
-            </button>
-            <button className="btn btn-secondary" onClick={() => updateValue("backgroundType", "image")}>
-              Image
-            </button>
-          </div>
-        </div>
+        <AnimatePresence initial={false}>
+          {theme != "system" && (
+            <motion.div
+              className="flex gap-2"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <button onClick={() => setTheme("light")} className="w-16 h-12">
+                <p>Light</p>
+              </button>
+              <button onClick={() => setTheme("dark")} className="w-16 h-12">
+                <p>Dark</p>
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-      <div>
-        <label className="text-font-bold">Transparency Effects</label>
-        <div className="flex gap-2">
-          <input type="checkbox" name="blurEffects" checked={userSettings.blurEffects} onChange={() => updateValue("blurEffects", !userSettings.blurEffects)} />
-        </div>
+      <div className="border-2 border-accent rounded-sm flex flex-col gap-2 p-2">
+        <h2 className="text-2xl font-bold">Other Settings</h2>
+        <p>Workin on it :3</p>
       </div>
     </Div>
   );

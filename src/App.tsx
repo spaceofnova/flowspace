@@ -7,6 +7,7 @@ import Loader from "./components/ui/Loader";
 import { User } from "@supabase/supabase-js";
 import Wallpaper from "./components/ui/Wallpaper";
 import UserSettingsProvider from "./components/providers/UserSettingsProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 function App() {
   const [user, setUser] = useState<User>();
@@ -42,6 +43,7 @@ function App() {
           <Wallpaper />
         </div>
       </UserSettingsProvider>
+      <Toaster />
     </div>
   );
 }

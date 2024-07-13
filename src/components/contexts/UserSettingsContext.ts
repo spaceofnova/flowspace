@@ -28,7 +28,7 @@ export const useUserSettings = () => {
 
 export const defaultUserSettings: UserSettings = {
   blurEffects: true,
-  backgroundType: "image",
+  backgroundType: "color",
   wallaper: {
     url: "https://fastly.picsum.photos/id/260/1920/1080.jpg?hmac=IdFaEpfvllJQwDliRd5bxaQ8hHy6lC_cB48eAYrSEPA",
     type: "remote",

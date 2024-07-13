@@ -1,4 +1,5 @@
 import { useThemeDetector } from "@/utils/hook";
+import useThemeColor from "@/utils/useThemeColor";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "dark" | "light" | "system";
@@ -30,6 +31,8 @@ export function ThemeProvider({
   const [theme, setTheme] = useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_themeColor, updateThemeColor] = useThemeColor();
   const systemTheme = useThemeDetector();
   useEffect(() => {
     const root = window.document.documentElement;
@@ -38,12 +41,15 @@ export function ThemeProvider({
 
     if (theme === "system") {
       const usedTheme = systemTheme ? "dark" : "light";
+      updateThemeColor(usedTheme === "dark" ? "#100a09" : "#f7eceb");
       root.classList.add(usedTheme);
       return;
     }
 
+    root.style.transition = "all 0.35s ease-in-out";
+    updateThemeColor(theme === "dark" ? "#100a09" : "#f7eceb");
     root.classList.add(theme);
-  }, [theme, systemTheme]);
+  }, [theme, systemTheme, updateThemeColor]);
 
   const value = {
     theme,
@@ -60,6 +66,7 @@ export function ThemeProvider({
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
 

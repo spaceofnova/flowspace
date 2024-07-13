@@ -12,9 +12,8 @@ export default function Loader() {
       const {
         data: { user },
       } = await supabase().auth.getUser();
-      const { data: games } = await supabase().from("games").select("*");
 
-      if (user && games && isLoading) {
+      if (user && isLoading) {
         addToConsole("log", "user data loaded");
         setIsLoading(false);
       } else {
