@@ -2,9 +2,11 @@ import { Link, useLocation } from "react-router-dom";
 import Div from "./elements/Div";
 import { Grid, Home, ShoppingBagIcon, Wrench } from "lucide-react";
 import { ModeToggle } from "./darkmodetoggle";
+import { useUserSettings } from "../contexts/UserSettingsContext";
 
 export default function Nav() {
   const location = useLocation();
+  const { userSettings } = useUserSettings();
 
   const NavPages = [
     {
@@ -36,6 +38,7 @@ export default function Nav() {
       </div>
       {NavPages.map((page) => (
         <Link
+          unstable_viewTransition={userSettings.newPageTransition}
           to={page.path}
           key={page.name}
           className={`flex items-center justify-center w-full transition-all duration-400 ease-out p-2 md:p-0 ${

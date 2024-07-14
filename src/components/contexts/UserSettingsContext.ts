@@ -9,6 +9,7 @@ export interface UserSettings {
   };
   devTools?: boolean;
   blurEffects?: boolean;
+  newPageTransition?: boolean;
 }
 interface UserSettingsProviderProps {
   userSettings: UserSettings;
@@ -34,6 +35,7 @@ export const defaultUserSettings: UserSettings = {
     type: "remote",
     author: "",
   },
+  newPageTransition: false,
 };
 
 export const UserSettingsContext =

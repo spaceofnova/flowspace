@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import supabase from "../utils/supabase";
+import { Input } from "@/components/ui/input";
+import { Img } from "react-image";
 
 interface App {
   id: string;
@@ -60,32 +62,32 @@ export default function Apps() {
     loadItems();
   }, []);
   return (
-    <div className="grid">
+    <div className="grid content">
       <div className="flex w-full gap-4">
-        <input
+        <Input
           type="search"
           name="items_search"
           placeholder="Search Items.."
-          className="bg-background/75 p-2 rounded-md h-8 w-full"
+          className="w-full "
           autoComplete="off"
           onChange={filterItems}
         />
       </div>
-      <div className="flex gap-4 flex-wrap p-4 h-full w-[calc(100%-2rem)] mx-auto md:w-full">
+      <div className="flex gap-4 flex-wrap p-6 h-full w-full mx-auto md:w-full">
         {filteredItems?.map((item: App) => (
           <Link
-            className="h-28 w-36 bg-base-300 flex flex-col relative cursor-pointer overflow-hidden rounded-md p-0 animate-in hover:bg-base-300/90"
+            className="h-24 w-60 bg-background flex relative cursor-pointer overflow-hidden rounded-xl p-2 animate-up hover:bg-accent transition-colors border-2 border-accent hover:border-white/10"
             to={`/web/apps/${item.id}`}
             key={item.id}
             onClick={() => addToRecents(item)}
           >
-            <img
+            <Img
               src={item.img}
               alt="Item"
-              className="w-full rounded-lg object-cover aspect-square"
+              className="w-20 rounded-lg object-cover aspect-square"
             />
-            <div className="text-center w-full items-center absolute bottom-0 z-10 bg-background/75 text-xl font-medium">
-              <p className="text-sm">{item.name}</p>
+            <div>
+              <h1 className="font-bold ml-2">{item.name}</h1>
             </div>
           </Link>
         ))}

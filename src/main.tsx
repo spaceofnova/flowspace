@@ -64,7 +64,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      <RouterProvider router={router} />
+      <RouterProvider
+        router={router}
+        future={{
+          // Wrap all state updates in React.startTransition()
+          v7_startTransition: false,
+        }}
+      />
     </ThemeProvider>
   </React.StrictMode>
 );

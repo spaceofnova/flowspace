@@ -23,7 +23,7 @@ export default function Settings() {
     },
   ];
   return (
-    <Div className="flex h-[calc(100%-4rem)] w-full md:w-[calc(100%-24rem)] mx-auto m-8 rounded-xl border-accent border-2 overflow-y-auto relative">
+    <Div className="flex h-[calc(100%-2rem)] w-full md:w-[calc(100%-2rem)] m-4 rounded-xl border-accent border-2 overflow-y-auto relative content">
       <div className="flex flex-col gap-2 border-r-accent border-r-2 p-2 relative">
         <h1 className="text-4xl font-bold">Settings</h1>
         {pages.map((item) => (

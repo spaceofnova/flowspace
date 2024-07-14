@@ -28,7 +28,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col justify-between h-full">
+      <div className="flex flex-col justify-between h-full content">
         <div>
           <h1 className="text-4xl font-bold flex gap-2 items-center">
             {greeting +

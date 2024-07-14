@@ -1,6 +1,6 @@
 export default function Store() {
   return (
-    <div className="Store">
+    <div className="Store content">
       <h1>Store</h1>
     </div>
   );
