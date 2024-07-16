@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+// import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import Root from "./Root";
@@ -58,19 +58,30 @@ const router = createBrowserRouter([
   },
 ]);
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+const root = createRoot(document.getElementById("root") as HTMLElement);
 root.render(
-  <React.StrictMode>
-    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-      <RouterProvider
-        router={router}
-        future={{
-          // Wrap all state updates in React.startTransition()
-          v7_startTransition: false,
-        }}
-      />
-    </ThemeProvider>
-  </React.StrictMode>
+  <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+    <RouterProvider
+      router={router}
+      future={{
+        // Wrap all state updates in React.startTransition()
+        v7_startTransition: true,
+      }}
+    />
+  </ThemeProvider>
 );
+
+// Add strict mode back in later
+// root.render(
+//   <StrictMode>
+//     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+//       <RouterProvider
+//         router={router}
+//         future={{
+//           // Wrap all state updates in React.startTransition()
+//           v7_startTransition: true,
+//         }}
+//       />
+//     </ThemeProvider>
+//   </StrictMode>
+// );

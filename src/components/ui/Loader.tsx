@@ -1,23 +1,24 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import supabase from "../../utils/supabase";
-import { ConsoleContext } from "../providers/ConsoleProvider";
+import {
+  initEventListeners,
+  loadAndExecuteAddons,
+} from "@/utils/addons/functions";
 
 export default function Loader() {
   const [isLoading, setIsLoading] = useState(true);
-  const { addToConsole } = useContext(ConsoleContext);
 
   useEffect(() => {
     const handler = async () => {
-      // initializeAddons();
+      initEventListeners();
+      await loadAndExecuteAddons();
       const {
         data: { user },
       } = await supabase().auth.getUser();
 
       if (user && isLoading) {
-        addToConsole("log", "user data loaded");
         setIsLoading(false);
       } else {
-        addToConsole("error", "user data not loaded");
         setTimeout(() => setIsLoading(false), 450);
       }
     };

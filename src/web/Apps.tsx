@@ -17,19 +17,6 @@ interface event {
   };
 }
 
-function addToRecents(item: App) {
-  if (typeof window !== "undefined") {
-    const recentItems = JSON.parse(localStorage.getItem("recentItems") || "[]");
-    if (!recentItems.includes(item)) {
-      recentItems.push(item);
-      if (recentItems.length > 5) {
-        recentItems.splice(0, recentItems.length - 5);
-      }
-      localStorage.setItem("recentItems", JSON.stringify(recentItems));
-    }
-  }
-}
-
 export default function Apps() {
   const [items, setItems] = useState<App[]>([]);
   const [filteredItems, setFilteredItems] = useState<App[]>([]);
@@ -79,7 +66,6 @@ export default function Apps() {
             className="h-24 w-60 bg-background flex relative cursor-pointer overflow-hidden rounded-xl p-2 animate-up hover:bg-accent transition-colors border-2 border-accent hover:border-white/10"
             to={`/web/apps/${item.id}`}
             key={item.id}
-            onClick={() => addToRecents(item)}
           >
             <Img
               src={item.img}
