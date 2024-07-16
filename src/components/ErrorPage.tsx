@@ -1,15 +1,26 @@
-import { Link } from "react-router-dom";
+import { isRouteErrorResponse, useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
-  return (
-    <div className="flex flex-col items-center justify-center h-screen bg-background text-text">
-      <h1 className="text-3xl font-bold">Oops!</h1>
-      <p className="text-md">
-        Looks like you&apos;re lost. Try going back to the home page.
-      </p>
-      <Link to="/" className="border border-white/10 rounded-md p-2 hover:bg-white/10 transition-colors">
-        Go back home
-      </Link>
-    </div>
-  );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const error: any = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    if (error.status === 404) {
+      return <div>This page doesn't exist!</div>;
+    }
+
+    if (error.status === 401) {
+      return <div>You aren't authorized to see this</div>;
+    }
+
+    if (error.status === 503) {
+      return <div>Looks like our API is down</div>;
+    }
+
+    if (error.status === 418) {
+      return <div>🫖</div>;
+    }
+  }
+
+  return <div>Something went wrong 😭 Error: {error.message}</div>;
 }

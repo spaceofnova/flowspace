@@ -1,30 +1,55 @@
 import supabase from "../utils/supabase";
 import { useNavigate, Link } from "react-router-dom";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import SyncLoader from "react-spinners/SyncLoader";
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+
+const formSchema = z.object({
+  email: z.string().email().min(3).max(255, {
+    message: "Username must be at least 3 characters.",
+  }),
+  password: z.string().min(8).max(255, {
+    message: "Password must be at least 8 characters.",
+  }),
+});
+
 export default function Login() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const signIn = async () => {
+  const signIn = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
-    const email = (document.getElementById("email") as HTMLInputElement).value;
-    const password = (document.getElementById("password") as HTMLInputElement)
-      .value;
+    const { email, password } = values;
 
     const { error } = await supabase().auth.signInWithPassword({
       email,
@@ -62,63 +87,63 @@ export default function Login() {
         </svg>{" "}
         Back
       </Link>
-      <div className="animate-in">
-        <Card className="flex flex-col w-full justify-center text-foreground mx-auto sm:max-w-sm border border-white/10 p-2 rounded-xl h-fit bg-white/5">
-          <CardHeader>
-            <CardTitle>Login</CardTitle>
-            <CardDescription>To continue to Flowspace</CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-4">
-            <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                autoComplete="email"
-                required
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    document.getElementById("password")?.focus();
-                  }
-                }}
+      <Card className="animate-animate-in flex flex-col w-full justify-center text-foreground mx-auto sm:max-w-sm border border-white/10 p-2 rounded-xl h-fit bg-white/5">
+        <CardHeader>
+          <CardTitle>Login</CardTitle>
+          <CardDescription>To continue to Flowspace</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(signIn)} className="space-y-2">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="email@example.com"
+                        autoComplete="email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-            <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                required
-                autoComplete="current-password"
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    document.getElementById("login")?.click();
-                  }
-                }}
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="••••••••"
+                        autoComplete="current-password"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button
-              onClick={signIn}
-              className="w-full flex justify-between"
-              disabled={loading}
-              id="login"
-            >
-              Login{" "}
-              <SyncLoader
-                loading={loading}
-                size={8}
-                color="currentColor"
-                aria-label="Loading Spinner"
-              />
-            </Button>
-          </CardFooter>
-          {error && <p className="mx-auto text-red-500">{error}</p>}
-        </Card>
-      </div>
+              <Button type="submit" className="w-full flex justify-between">
+                Login{" "}
+                <SyncLoader
+                  loading={loading}
+                  size={8}
+                  color="currentColor"
+                  aria-label="Loading Spinner"
+                />
+              </Button>
+            </form>
+          </Form>
+        </CardContent>
+        {error && <p className="mx-auto text-red-500">{error}</p>}
+      </Card>
     </div>
   );
 }
