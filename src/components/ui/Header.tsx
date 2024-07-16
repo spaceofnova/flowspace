@@ -30,7 +30,7 @@ export default function Header() {
         </Link>
         <div className="items-center gap-2 hidden md:flex">
           <Link to="/">
-            <p className="text-xl font-bold">Flowspace - Dev</p>
+            <p className="text-xl font-bold">Flowspace</p>
           </Link>
         </div>
       </div>
