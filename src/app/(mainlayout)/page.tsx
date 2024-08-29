@@ -12,10 +12,8 @@ export default function Home() {
         rel="noopener noreferrer"
         className="max-w-80 relative"
       >
-        <Image
+        <img
           src="https://storage.ko-fi.com/cdn/kofi3.png?v=3"
-          fill
-          sizes="100%"
           alt="Buy Me a Coffee"
         />
       </a>
