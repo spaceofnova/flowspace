@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import Script from "next/script";
+import { ThemeProvider } from "next-themes";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,9 +29,7 @@ export default function RootLayout({
           inter.variable,
         )}
       >
-        <ThemeProvider attribute="class" enableSystem defaultTheme="system">
-          {children}
-        </ThemeProvider>
+        <ThemeProvider attribute="class">{children}</ThemeProvider>
         <Toaster />
         <SpeedInsights />
       </body>
