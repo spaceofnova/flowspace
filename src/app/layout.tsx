@@ -25,19 +25,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased flex",
-          inter.variable
+          "flex min-h-screen bg-background font-sans antialiased",
+          inter.variable,
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        <ThemeProvider attribute="class">{children}</ThemeProvider>
+        <Toaster />
+
         <SpeedInsights />
       </body>
     </html>
