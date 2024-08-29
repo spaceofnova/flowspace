@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Home() {
   return (
     <main className="flex h-full flex-col items-center justify-center gap-4">
@@ -5,12 +7,14 @@ export default function Home() {
 
       {/* Kofi */}
       <a
-        href="https://ko-fi.com/novafloss"
+        href="https://ko-fi.com/spaceofnova"
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img
+        <Image
           src="https://storage.ko-fi.com/cdn/kofi3.png?v=3"
+          fill
+          sizes="100%"
           alt="Buy Me a Coffee"
         />
       </a>
