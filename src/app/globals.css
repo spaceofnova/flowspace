@@ -33,7 +33,7 @@
     --ring: 150 100% 88%;
     --radius: 0.5rem;
   }
-  [data-theme='dark'] {
+  .dark {
     --background: 150 10% 5%;
     --foreground: 150 0% 90%;
     --card: 150 0% 0%;
