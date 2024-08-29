@@ -24,22 +24,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <Script src="/theme.js" strategy="beforeInteractive" />
-      </head>
-      <body
-        className={cn(
-          "flex min-h-screen bg-background font-sans antialiased",
-          inter.variable,
-        )}
-      >
-        <ThemeProvider attribute="class" enableSystem defaultTheme="system">
+      <ThemeProvider attribute="class" enableSystem defaultTheme="system">
+        <body
+          className={cn(
+            "flex min-h-screen bg-background font-sans antialiased",
+            inter.variable,
+          )}
+        >
           {children}
-        </ThemeProvider>
-        <Toaster />
 
-        <SpeedInsights />
-      </body>
+          <Toaster />
+
+          <SpeedInsights />
+        </body>
+      </ThemeProvider>
     </html>
   );
 }
