@@ -10,6 +10,7 @@ export default function Home() {
         href="https://ko-fi.com/spaceofnova"
         target="_blank"
         rel="noopener noreferrer"
+        className="max-w-80 relative"
       >
         <Image
           src="https://storage.ko-fi.com/cdn/kofi3.png?v=3"
