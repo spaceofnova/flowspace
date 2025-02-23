@@ -1,7 +1,8 @@
 import { createClient } from "@/utils/supabase/client";
 import Iframe from "react-iframe";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const { data: game } = await createClient()
     .from("games")
     .select("*")

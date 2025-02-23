@@ -20,11 +20,17 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Post({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
+export default async function Post(
+  props: {
+    params: Promise<{ id: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const { data: blog } = await createClient()
     .from("blogs")
     .select()

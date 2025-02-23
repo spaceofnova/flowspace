@@ -14,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MenuIcon } from "lucide-react";
+import { indexGames } from "@/utils/indexing";
 
 type NavLink = {
   title: string;
@@ -30,8 +31,14 @@ const links: NavLink[] = [
   },
 ];
 
+const index = async () => {
+  await indexGames();
+};
+
 export default function Nav() {
   const pathname = usePathname();
+
+  index();
   // Remove border after nav is done
   return (
     <header className="h-12 w-full border-b">
@@ -64,7 +71,7 @@ export default function Nav() {
               key={index}
               href={link.href}
               className={
-                "transition-colors duration-150 hover:text-foreground hover:underline" +
+                "hover:text-foreground transition-colors duration-150 hover:underline" +
                 (pathname === link.href
                   ? " text-foreground"
                   : " text-foreground/70")

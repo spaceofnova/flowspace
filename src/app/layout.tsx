@@ -4,8 +4,8 @@ import "./globals.css";
 
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "next-themes";
+import { indexGames } from "@/utils/indexing";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,13 +25,12 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "flex min-h-screen bg-background font-sans antialiased",
+          "bg-background flex min-h-screen font-sans antialiased",
           inter.variable,
         )}
       >
         <ThemeProvider attribute="class">{children}</ThemeProvider>
         <Toaster />
-        <SpeedInsights />
       </body>
     </html>
   );
