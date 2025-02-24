@@ -29,6 +29,10 @@ const links: NavLink[] = [
     title: "Beta Info!",
     href: "/blogs/beta-info",
   },
+  {
+    title: "Request a Game",
+    href: "/request",
+  },
 ];
 
 const index = async () => {
@@ -39,9 +43,9 @@ export default function Nav() {
   const pathname = usePathname();
 
   index();
-  // Remove border after nav is done
+  // TODO: Remove border after nav is done
   return (
-    <header className="h-12 w-full border-b">
+    <header className="bg-background/20 fixed top-0 z-20 h-12 w-full backdrop-blur-md">
       <nav className="mx-auto flex h-full max-w-screen-2xl items-center gap-2 px-4 md:justify-between">
         <div className="flex items-center gap-2 md:hidden">
           <DropdownMenu>

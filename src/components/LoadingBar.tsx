@@ -8,7 +8,7 @@ export default function LoadingBar() {
         initial={{ height: 0 }}
         animate={{ height: "0.5rem" }}
         exit={{ height: 0 }}
-        className="h-1 w-full absolute top-0 left-0 z-10 overflow-hidden"
+        className="absolute top-0 left-0 z-100 h-1 w-full overflow-hidden"
       >
         <motion.div
           transition={{
@@ -18,7 +18,7 @@ export default function LoadingBar() {
           }}
           animate={{ left: ["-100%", "108%"] }}
           exit={{ left: "100%" }}
-          className="h-full w-96 bg-primary absolute"
+          className="bg-primary absolute h-full w-96"
         />
       </motion.div>
     </AnimatePresence>

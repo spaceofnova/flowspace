@@ -1,11 +1,37 @@
 import { createClient } from "@/utils/supabase/client";
 import Iframe from "react-iframe";
 
-export default async function Page(props: { params: Promise<{ id: string }> }) {
-  const params = await props.params;
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const title =
+    params.id === "demo" ? "Demo - Flowspace" : await fetchGameTitle(params.id);
+  return { title };
+}
+
+async function fetchGameTitle(id: string): Promise<string> {
   const { data: game } = await createClient()
     .from("games")
-    .select("*")
+    .select("name")
+    .match({ id })
+    .single();
+
+  return game?.name || "Game Not Found";
+}
+
+export default async function Page({ params }: { params: { id: string } }) {
+  if (params.id === "demo") {
+    return (
+      <div className="flex h-full w-full flex-col">
+        <Iframe
+          className="h-full overflow-hidden rounded-md"
+          url="https://example.com"
+        />
+      </div>
+    );
+  }
+
+  const { data: game } = await createClient()
+    .from("games")
+    .select("id, name, url")
     .match({ id: params.id })
     .single();
 
@@ -14,14 +40,8 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
   }
 
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="h-16 flex justify-center items-center">
-        <h1 className="text-2xl font-bold">{game.name}</h1>
-      </div>
-      <Iframe
-        className="h-full p-4 rounded-md overflow-hidden"
-        url={game.url}
-      />
+    <div className="flex h-full w-full flex-col">
+      <Iframe className="h-full overflow-hidden rounded-md" url={game.url} />
     </div>
   );
 }

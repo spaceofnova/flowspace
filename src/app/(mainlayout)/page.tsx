@@ -1,4 +1,7 @@
-import Image from "next/image";
+export const metadata = {
+  title: "Home - Flowspace",
+  description: "The home page of Flowspace.",
+};
 
 export default function Home() {
   return (
@@ -10,7 +13,7 @@ export default function Home() {
         href="https://ko-fi.com/spaceofnova"
         target="_blank"
         rel="noopener noreferrer"
-        className="max-w-80 relative"
+        className="relative max-w-80"
       >
         <img
           src="https://storage.ko-fi.com/cdn/kofi3.png?v=3"
@@ -19,7 +22,7 @@ export default function Home() {
       </a>
 
       {process.env.NODE_ENV === "development" && (
-        <p className="fixed bottom-0 right-0 rounded-md p-2 font-bold text-gray-200 dark:text-gray-800">
+        <p className="fixed right-0 bottom-0 rounded-md p-2 font-bold text-gray-200 dark:text-gray-800">
           DEBUG
         </p>
       )}

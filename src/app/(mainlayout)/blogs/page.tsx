@@ -4,6 +4,11 @@ import Image from "next/image";
 
 export const revalidate = 60;
 
+export const metadata = {
+  title: "Blogs - Flowspace",
+  description: "Browse all the blogs available on Flowspace.",
+};
+
 export default async function Posts() {
   const { data: blogs } = await createClient()
     .from("blogs")
@@ -15,7 +20,7 @@ export default async function Posts() {
   }
 
   return (
-    <div className="mx-auto flex max-w-screen-2xl flex-col p-4">
+    <div className="mx-auto flex max-w-screen-2xl flex-col">
       <h1 className="mb-4 text-4xl font-bold">Blogs</h1>
       <div className="flex flex-wrap gap-4">
         {blogs.map((blog) => (
