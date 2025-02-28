@@ -22,7 +22,7 @@ Our primary goal is simple: to help students maintain and improve their mental h
 
 ## Built With ❤️
 
--   [Next.js 14](https://nextjs.org/) - For a blazing fast and smooth experience! ⚡
+-   [Next.js 15](https://nextjs.org/) - For a blazing fast and smooth experience! ⚡
 -   [TypeScript](https://www.typescriptlang.org/) - Because we like things typed and organized! 🤓
 -   [shadcn/ui](https://ui.shadcn.com/) - For beautiful and reusable components. ✨
 -   [Tailwind CSS](https://tailwindcss.com/) - For styling that's a breeze! 💨
